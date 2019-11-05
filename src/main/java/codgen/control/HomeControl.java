@@ -4,8 +4,6 @@ import codgen.control.interfaces.ParentControl;
 import codgen.view.HomeWindow;
 
 public class HomeControl extends ParentControl<HomeWindow>{
-	
-	private DatabaseConfigControl databaseConfigControl = DatabaseConfigControl.getInstance();
 
 	@Override
 	protected HomeWindow window() {
@@ -13,7 +11,7 @@ public class HomeControl extends ParentControl<HomeWindow>{
 	}
 	
 	public void navigateToDatabaseConfig() {
-		databaseConfigControl.openWindow();
+		DatabaseConfigControl.getInstance().openWindow();
 		this.closeWindow();
 	}
 	

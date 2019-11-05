@@ -75,6 +75,7 @@ public class PROP {
 	public static void setProperty(String fileName, Properties properties) {
 		try (OutputStream output = new FileOutputStream("data/"+fileName+".properties")) {
 			properties.store(output, null);
+			props.put(fileName, properties);
         } catch (IOException io) {
         	io.printStackTrace();
         	JOptionPane.showMessageDialog(null, "problem while writing to file " +fileName);

@@ -77,7 +77,7 @@ public class DataBaseConfigWindow extends ParentWindow<DatabaseConfigControl> {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				saveData();
-				
+				control.navigateToHome();
 			}
 		});
 		contentPane.add(btnSave, "cell 1 5");
@@ -91,7 +91,6 @@ public class DataBaseConfigWindow extends ParentWindow<DatabaseConfigControl> {
 		properties.setProperty("password", this.textFieldPassword.getText());
 		properties.setProperty("port", this.formattedTextFieldPort.getText());
 		PROP.setProperty(PROP.DB_CONFIG, properties);
-
 	}
 
 	@Override
