@@ -32,6 +32,7 @@ public class DataBaseConfigWindow extends ParentWindow<DatabaseConfigControl> {
 	private JFormattedTextField formattedTextFieldPort;
 	private JTextField textFieldPassword;
 	private JButton btnSave;
+	private JButton btnCancel;
 
 	public DataBaseConfigWindow(DatabaseConfigControl control) {
 
@@ -80,7 +81,15 @@ public class DataBaseConfigWindow extends ParentWindow<DatabaseConfigControl> {
 				control.navigateToHome();
 			}
 		});
-		contentPane.add(btnSave, "cell 1 5");
+		contentPane.add(btnSave, "flowx,cell 1 5");
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.navigateToHome();
+			}
+		});
+		contentPane.add(btnCancel, "cell 1 5");
 	}
 
 	private void saveData() {
@@ -89,7 +98,7 @@ public class DataBaseConfigWindow extends ParentWindow<DatabaseConfigControl> {
 		properties.setProperty("sid", this.textFieldSID.getText());
 		properties.setProperty("userName", this.textFieldUserName.getText());
 		properties.setProperty("password", this.textFieldPassword.getText());
-		properties.setProperty("port", this.formattedTextFieldPort.getText());
+		properties.setProperty("port", this.formattedTextFieldPort.getText().replace(",", ""));
 		PROP.setProperty(PROP.DB_CONFIG, properties);
 	}
 

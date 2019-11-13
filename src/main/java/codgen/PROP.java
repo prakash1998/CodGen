@@ -5,7 +5,6 @@
  */
 package codgen;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class PROP {
 	public static final String DB_CONFIG = "DB_CONFIG";
-	public static final String APP = "APP";
+	public static final String SAVED_PATHS = "SAVED_PATHS";
 
 	private static Map<String, Properties> props = new HashMap<String, Properties>();
 
@@ -62,15 +61,15 @@ public class PROP {
 		return PROP.getInstance(fileName).getProperty(key);
 	}
 
-	public static void setProperty(String fileName, String key, String value) {
-		try (OutputStream output = new FileOutputStream("data/"+fileName+".properties")) {
-			PROP.getInstance(fileName).setProperty(key, value);
-			props.get(fileName).store( output, null);
-        } catch (IOException io) {
-        	io.printStackTrace();
-        	JOptionPane.showMessageDialog(null, "problem while writing to file " +fileName);
-        }
-	}
+//	public static void setProperty(String fileName, String key, String value) {
+//		try (OutputStream output = new FileOutputStream("data/"+fileName+".properties")) {
+//			PROP.getInstance(fileName).setProperty(key, value);
+//			props.get(fileName).store( output, null);
+//        } catch (IOException io) {
+//        	io.printStackTrace();
+//        	JOptionPane.showMessageDialog(null, "problem while writing to file " +fileName);
+//        }
+//	}
 	
 	public static void setProperty(String fileName, Properties properties) {
 		try (OutputStream output = new FileOutputStream("data/"+fileName+".properties")) {

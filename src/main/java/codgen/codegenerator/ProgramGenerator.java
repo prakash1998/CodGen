@@ -1,6 +1,11 @@
 package codgen.codegenerator;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,12 +18,61 @@ public class ProgramGenerator {
 
     public static void main(String[] args) throws  Exception{
 
-        String path = "src/main/java/com/integ/test";
+        String path = "src/main/java/codgen";
         String databaseTableName = "UNIT";
 
         generateDefClass(new DatabaseConnection("localhost","XE","PMGR","PMGR",49191),
                 databaseTableName,path);
 //        generateApi(databaseTableName,path,"UNITID","EFFECTIVEDATE");
+
+    }
+    
+    public static List<String> getAllTables(DatabaseConnection connection){
+        List<String> tableNameList = new ArrayList<String>();
+
+        String query = "select table_name from user_tables order by table_name";
+
+        Connection conn = null;
+        try {
+            conn = connection.getOracleConnection();
+            Statement statement = null;
+            try {
+
+                statement = conn.createStatement();
+
+                ResultSet rs = statement.executeQuery(query);
+                
+                while(rs.next()) {
+                	tableNameList.add(rs.getString(1));
+                }
+
+            } catch (SQLException e ) {
+                System.out.println("problem while querying the database please check table name");
+                e.printStackTrace();
+            } finally {
+            	conn.close();
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("problem while connecting to database");
+            e.printStackTrace();
+        } 
+        return tableNameList;
+    }
+    
+    public static void generateDefClass(DatabaseConnection connection,String databaseTableName,String path) throws Exception {
+        File directory = null;
+        try {
+            directory = createFile(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(directory != null){
+            DefClassGenerator.generateClassFor(connection,databaseTableName,directory);
+        }
 
     }
 
@@ -37,19 +91,7 @@ public class ProgramGenerator {
 
     }
 
-    public static void generateDefClass(DatabaseConnection connection,String databaseTableName,String path) throws Exception {
-        File directory = null;
-        try {
-            directory = createFile(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        if(directory != null){
-            DefClassGenerator.generateClassFor(connection,databaseTableName,directory);
-        }
-
-    }
 
 
     private static File createFile(String path) throws FileException  {

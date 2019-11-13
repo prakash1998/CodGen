@@ -3,3 +3,5 @@
 .settings
 bin
 .classpath
+codegenerator.rar
+CodeGenerator-spring-boot.jar

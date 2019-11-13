@@ -81,6 +81,6 @@ public class DAOClassGenerator {
 
 
 
-        CommonUtils.writeProgramToFile(path,daoClass,"dao");
+        CommonUtils.writeProgramToFile(path,daoClass);
     }
 }

@@ -66,10 +66,12 @@ public class TableInformationFetcher {
                             columnClass,rsmd.isNullable(i) == 1));
 
                 }
-                conn.close();
+                
             } catch (SQLException e ) {
                 System.out.println("problem while querying the database please check table name");
                 e.printStackTrace();
+            } finally {
+            	conn.close();
             }
 
         } catch (ClassNotFoundException e) {

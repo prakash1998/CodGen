@@ -98,7 +98,7 @@ public class ApiClassGenerator {
                 .addField(context)
                 .build();
 
-        CommonUtils.writeProgramToFile(path,apiClass,"api");
+        CommonUtils.writeProgramToFile(path,apiClass);
 
     }
 

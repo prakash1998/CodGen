@@ -49,7 +49,7 @@ public abstract class ParentWindow<C extends ParentControl> extends JFrame {
 		// java - get screen size using the Toolkit class
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-		this.setSize(new Dimension(screenSize.width / 2, screenSize.height / 2));
+		this.setSize(new Dimension(600, 600));
 		// Determine the new location of the window
 		int w = this.getSize().width;
 		int h = this.getSize().height;
@@ -115,8 +115,8 @@ public abstract class ParentWindow<C extends ParentControl> extends JFrame {
 	protected abstract void onunload();
 	
 	public void showWindow() {
-		onload();
 		this.setVisible(true);
+		onload();
 	}
 	
 	public void closeWindow() {

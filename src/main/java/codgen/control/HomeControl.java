@@ -15,6 +15,11 @@ public class HomeControl extends ParentControl<HomeWindow>{
 		this.closeWindow();
 	}
 	
+	public void navigateToDefClassGeneration() {
+		DefClassGenerateControl.getInstance().openWindow();
+		this.closeWindow();
+	}
+	
 	private static HomeControl self;
 	
 	public static HomeControl getInstance() {

@@ -28,7 +28,7 @@ public class HomeWindow extends ParentWindow<HomeControl> {
 		btnGenerateDefClass = new JButton("Generate Def Class");
 		btnGenerateDefClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				control.navigateToDefClassGeneration();
 			}
 		});
 		contentPane.add(btnGenerateDefClass, "cell 0 0,alignx center,aligny center");

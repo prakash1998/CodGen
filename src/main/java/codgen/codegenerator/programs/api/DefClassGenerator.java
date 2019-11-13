@@ -30,10 +30,10 @@ public class DefClassGenerator {
         ClassName ModificationInfo = LibraryClasses.getDBUtilModificationInfo();
         ClassName ModifiableData = LibraryClasses.getDBUtilModifiableData();
 
-        ClassName valueAnnotation = ClassName.get("org.immutables.value","Value");
-        ClassName valueStyleAnnotation = ClassName.get("org.immutables.value","Value.Style");
-        ClassName valueImmutableAnnotation = ClassName.get("org.immutables.value","Value.Immutable");
-        ClassName valueAuxiliaryAnnotation = ClassName.get("org.immutables.value","Value.Auxiliary");
+//        ClassName valueAnnotation = ClassName.get("org.immutables.value","Value");
+        ClassName valueStyleAnnotation = ClassName.get("org.immutables.value","Value" ,"Style");
+        ClassName valueImmutableAnnotation = ClassName.get("org.immutables.value","Value","Immutable");
+        ClassName valueAuxiliaryAnnotation = ClassName.get("org.immutables.value","Value","Auxiliary");
         ClassName JsonDeserialize= ClassName.get("com.fasterxml.jackson.databind.annotation","JsonDeserialize");
         ClassName Mapper= ClassName.get("com.integ.db.mapper","Mapper");
 
@@ -76,13 +76,14 @@ public class DefClassGenerator {
         builder.addMethod(modificationinfo.build());
 
 
-        MethodSpec methodToAddValueAnnotation = MethodSpec.methodBuilder("toAddValueAnnotaion")
-                .addModifiers(Modifier.STATIC, Modifier.PUBLIC)
-                .addAnnotation(valueAnnotation)
-                .addStatement("error_remove this method")
-                .build();
+//        MethodSpec methodToAddValueAnnotation = MethodSpec.methodBuilder("toAddValueAnnotaion")
+//                .addModifiers(Modifier.STATIC, Modifier.PUBLIC)
+//                .addAnnotation(valueAnnotation)
+//                .addStatement("error_remove this method")
+//                .build();
+//
+//        builder.addMethod(methodToAddValueAnnotation);
 
-        builder.addMethod(methodToAddValueAnnotation);
 
 
         TypeSpec defClass = builder.addSuperinterface(ModifiableData)
@@ -99,7 +100,7 @@ public class DefClassGenerator {
                 .build();
 
 
-        CommonUtils.writeProgramToFile(path,defClass,"immutables");
+        CommonUtils.writeProgramToFile(path,defClass);
 
     }
 
