@@ -1,0 +1,14 @@
+variables:
+    MVN_OPTS: "-B -nsu -T 1C"
+stages:
+  - build
+maven:
+  stage: build
+  script: 
+    - mvn clean compile
+  tags:
+    - jdk8
+
+
+
+
