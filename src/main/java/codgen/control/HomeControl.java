@@ -20,9 +20,15 @@ public class HomeControl extends ParentControl<HomeWindow>{
 		this.closeWindow();
 	}
 	
+	public void navigateToRestApiGeneration() {
+		RestApiGenerateControl.getInstance().openWindow();
+		this.closeWindow();
+	}
+	
 	private static HomeControl self;
 	
 	public static HomeControl getInstance() {
-		return self == null ? new HomeControl() : self;
+		self = self == null ? new HomeControl() : self;
+		return self;
 	}
 }

@@ -1,8 +1,9 @@
 package codgen.control.interfaces;
 
+import codgen.control.HomeControl;
 import codgen.view.interfaces.ParentWindow;
 
-public abstract class ParentControl<W extends ParentWindow> {
+public abstract class ParentControl<W extends ParentWindow<?>> {
 	
 	protected W window;
 	
@@ -20,4 +21,9 @@ public abstract class ParentControl<W extends ParentWindow> {
 		window.closeWindow();
 	}
 
+	public void navigateToHome() {
+		HomeControl.getInstance().openWindow();
+		this.closeWindow();
+	}
+	
 }

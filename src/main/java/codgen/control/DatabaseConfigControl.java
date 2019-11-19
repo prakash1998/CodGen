@@ -11,15 +11,10 @@ public class DatabaseConfigControl extends ParentControl<DataBaseConfigWindow>{
 		return new DataBaseConfigWindow(this);
 	}
 	
-	public void navigateToHome() {
-		HomeControl.getInstance().openWindow();
-		this.closeWindow();
-	}
-	
-	
 	private static DatabaseConfigControl self;
 	
 	public static DatabaseConfigControl getInstance() {
-		return self == null ? new DatabaseConfigControl() : self;
+		self = self == null ? new DatabaseConfigControl() : self;
+		return self;
 	}
 }

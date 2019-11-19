@@ -17,6 +17,10 @@ import codgen.codegenerator.CommonUtils;
 import codgen.codegenerator.LibraryClasses;
 
 public class DAOClassGenerator {
+	
+//    public static void generate(String databaseTableName , File path , List<String> pkeys) throws IOException {
+//    	
+//    }
 
     public static void generate(String databaseTableName , File path , List<String> pkeys) throws IOException {
 
@@ -70,8 +74,7 @@ public class DAOClassGenerator {
                 .addStatement("return da -> da.$L($S\n,$T.$L($T.class))","get","select * " +
                         "from "+databaseTableName+" ",ImmutableExtractor,"rowExtractorOf",defclass)
                 .build();
-
-
+        
         TypeSpec daoClass = TypeSpec.classBuilder(defClassName+"DAO")
                 .addModifiers(Modifier.PUBLIC)
                 .addMethod(get)

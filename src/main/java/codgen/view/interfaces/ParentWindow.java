@@ -14,7 +14,7 @@ import javax.swing.JSeparator;
 
 import codgen.control.interfaces.ParentControl;
 
-public abstract class ParentWindow<C extends ParentControl> extends JFrame {
+public abstract class ParentWindow<C extends ParentControl<?>> extends JFrame {
 	
 	protected C control;
 	

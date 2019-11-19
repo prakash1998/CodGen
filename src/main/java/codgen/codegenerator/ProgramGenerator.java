@@ -75,6 +75,10 @@ public class ProgramGenerator {
         }
 
     }
+    
+    public static String getGeneratedDefClass(DatabaseConnection connection,String databaseTableName) throws Exception {
+         return DefClassGenerator.getGeneratedClassFor(connection,databaseTableName);
+    }
 
     public static void generateApi(DatabaseConnection connection, String databaseTableName, String path, String ... primaryKeyValues) throws Exception {
         File directory = null;

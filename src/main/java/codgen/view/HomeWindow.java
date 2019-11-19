@@ -18,12 +18,13 @@ public class HomeWindow extends ParentWindow<HomeControl> {
 	private JButton btnGenerateDefClass;
 	private JButton btnEditDatabaseParameter;
 	private JButton btnExit;
+	private JButton btnGenerateSimpleRest;
 	
 	
 	public HomeWindow(HomeControl control) {
 		super(control);
 
-		contentPane.setLayout(new MigLayout("", "[grow]", "[25px][25px][25px]"));
+		contentPane.setLayout(new MigLayout("", "[grow]", "[25px][][25px][25px]"));
 		
 		btnGenerateDefClass = new JButton("Generate Def Class");
 		btnGenerateDefClass.addActionListener(new ActionListener() {
@@ -39,7 +40,15 @@ public class HomeWindow extends ParentWindow<HomeControl> {
 				control.navigateToDatabaseConfig();
 			}
 		});
-		contentPane.add(btnEditDatabaseParameter, "cell 0 1,alignx center,aligny center");
+		
+		btnGenerateSimpleRest = new JButton("Generate Simple REST APIs");
+		btnGenerateSimpleRest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.navigateToRestApiGeneration();
+			}
+		});
+		contentPane.add(btnGenerateSimpleRest, "cell 0 1,alignx center");
+		contentPane.add(btnEditDatabaseParameter, "cell 0 2,alignx center,aligny center");
 		
 		btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
@@ -47,7 +56,7 @@ public class HomeWindow extends ParentWindow<HomeControl> {
 				control.closeWindow();
 			}
 		});
-		contentPane.add(btnExit, "cell 0 2,alignx center,aligny center");
+		contentPane.add(btnExit, "cell 0 3,alignx center,aligny center");
 
 
 	}

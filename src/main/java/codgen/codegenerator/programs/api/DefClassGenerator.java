@@ -8,6 +8,7 @@ import javax.lang.model.element.Modifier;
 
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
@@ -19,8 +20,19 @@ import codgen.codegenerator.database.query.TableColumn;
 import codgen.codegenerator.database.query.TableInformationFetcher;
 
 public class DefClassGenerator {
-
+	
     public static void generateClassFor(DatabaseConnection connection, String databaseTableName, File path) throws Exception{
+    	TypeSpec defClass = generateClassFor(connection, databaseTableName);  	
+        CommonUtils.writeProgramToFile(path,defClass);
+    }
+
+    public static String getGeneratedClassFor(DatabaseConnection connection, String databaseTableName) throws Exception{
+    	TypeSpec defClass = generateClassFor(connection, databaseTableName);
+		JavaFile file = JavaFile.builder("place-package-Name-here",defClass).build();
+		return file.toString();
+    }
+    
+    public static TypeSpec generateClassFor(DatabaseConnection connection, String databaseTableName) throws Exception{
 
         List<TableColumn> columns =  TableInformationFetcher.fetch(connection,databaseTableName);
 
@@ -100,8 +112,7 @@ public class DefClassGenerator {
                 .build();
 
 
-        CommonUtils.writeProgramToFile(path,defClass);
-
+        return defClass;
     }
 
     private static  String removeLast(String str) {

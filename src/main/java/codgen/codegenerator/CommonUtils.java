@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.google.common.base.CaseFormat;
 import com.squareup.javapoet.AnnotationSpec;
+import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 
@@ -67,10 +68,7 @@ public class CommonUtils {
 	}
 	
 	public static void writeProgramToFile(File path, TypeSpec typeSpec) throws IOException {
-		writeProgramToFile(path,typeSpec,new ArrayList<String>());
-	}
 
-	public static void writeProgramToFile(File path, TypeSpec typeSpec , List<String> explicitImports) throws IOException {
 		String[] temp = CommonUtils.getDirAndPackage(path);
 
 		String directory = temp[0];
@@ -98,4 +96,14 @@ public class CommonUtils {
 		return AnnotationSpec.builder(name).addMember("value", "$S", value).build();
 	}
 
+	public static AnnotationSpec getAnnotationSpec(ClassName name) {
+		return getAnnotationSpec(name, "");
+	}
+
+	public static AnnotationSpec getAnnotationSpec(ClassName name, String value) {
+		if (value.equals(""))
+			return AnnotationSpec.builder(name).build();
+		return AnnotationSpec.builder(name).addMember("value", "$S", value).build();
+	}
+	
 }

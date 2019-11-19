@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
-import javax.swing.plaf.OptionPaneUI;
 
 import codgen.PROP;
 import codgen.codegenerator.ProgramGenerator;
@@ -59,14 +58,10 @@ public class DefClassGenerateControl extends ParentControl<DefClassGenerateWindo
 		}
 	}
 
-	public void navigateToHome() {
-		HomeControl.getInstance().openWindow();
-		this.closeWindow();
-	}
-
 	private static DefClassGenerateControl self;
 
 	public static DefClassGenerateControl getInstance() {
-		return self == null ? new DefClassGenerateControl() : self;
+		self = self == null ? new DefClassGenerateControl() : self;
+		return self;
 	}
 }
