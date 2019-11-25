@@ -1,6 +1,6 @@
 version: 2
 jobs:
-    Build:
+    build:
         # Remove if parallelism is not desired
         parallelism: 2
         working_directory: ~/codegenci # directory where steps will run
