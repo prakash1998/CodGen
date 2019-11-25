@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import codgen.PROP;
 import codgen.codegenerator.ProgramGenerator;
 import codgen.codegenerator.database.connection.DatabaseConnection;
-import codgen.codegenerator.programs.api.GetDataGenerator;
+import codgen.codegenerator.programs.MethodGenerators;
 import codgen.control.interfaces.ParentControl;
 import codgen.view.RestApiGeneratedCodeWindow;
 
@@ -61,11 +61,58 @@ public class RestApiGeneratedCodeControl extends ParentControl<RestApiGeneratedC
 	}
 	
 	public String getGetDataDao() {
-		return GetDataGenerator.generateDao(this.tableName);
+		return MethodGenerators.generateGetDao(this.tableName);
 	}
 	
 	public String getGetDataApi() {
-		return GetDataGenerator.generateApi(this.tableName , this.apiPath);
+		return MethodGenerators.generateGetApi(this.tableName , this.apiPath);
+	}
+	
+	public String getSaveDataDao() {
+		Properties props = PROP.getInstance(PROP.DB_CONFIG);
+		try {
+			DatabaseConnection connection = new DatabaseConnection(props.getProperty("host"), props.getProperty("sid"),
+					props.getProperty("userName"), props.getProperty("password"),
+					Integer.parseInt(props.getProperty("port")));
+			return MethodGenerators.generateSaveDao(connection,this.tableName);
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "inappropriate port!!!!! check database configuration");
+			this.navigateToHome();
+			e.printStackTrace();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "check database configuration");
+			this.navigateToHome();
+			e.printStackTrace();
+		}
+		return "Problem While generating Class";
+	}
+	
+	
+	public String getSaveDataApi() {
+		return MethodGenerators.generateSaveApi(this.tableName , this.apiPath);
+	}
+	
+	public String getDeleteDataDao() {
+		Properties props = PROP.getInstance(PROP.DB_CONFIG);
+		try {
+			DatabaseConnection connection = new DatabaseConnection(props.getProperty("host"), props.getProperty("sid"),
+					props.getProperty("userName"), props.getProperty("password"),
+					Integer.parseInt(props.getProperty("port")));
+			return MethodGenerators.generateDeleteDao(connection,this.tableName);
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "inappropriate port!!!!! check database configuration");
+			this.navigateToHome();
+			e.printStackTrace();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "check database configuration");
+			this.navigateToHome();
+			e.printStackTrace();
+		}
+		return "Problem While generating Class";
+	}
+	
+	public String getDeleteDataApi() {
+		return MethodGenerators.generateDeleteApi(this.tableName , this.apiPath);
 	}
 	
 	private static RestApiGeneratedCodeControl self;

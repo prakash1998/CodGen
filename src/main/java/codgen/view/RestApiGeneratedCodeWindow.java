@@ -119,6 +119,10 @@ public class RestApiGeneratedCodeWindow extends ParentWindow<RestApiGeneratedCod
 		textAreaDefClass.setText(control.getDefClass());
 		textAreaGetDao.setText(control.getGetDataDao());
 		textAreaGetApi.setText(control.getGetDataApi());
+		textAreaSaveDao.setText(control.getSaveDataDao());
+		textAreaSaveApi.setText(control.getSaveDataApi());
+		textAreaDeleteDao.setText(control.getDeleteDataDao());
+		textAreaDeleteApi.setText(control.getDeleteDataApi());
 	}
 
 	@Override

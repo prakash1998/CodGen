@@ -8,8 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import codgen.codegenerator.database.connection.DatabaseConnection;
+import codgen.codegenerator.database.query.TableColumn;
+import codgen.codegenerator.database.query.TableInformationFetcher;
 import codgen.codegenerator.exception.FileException;
 import codgen.codegenerator.programs.api.DefClassGenerator;
 import codgen.codegenerator.programs.api.RestAPIGenerator;
@@ -95,7 +98,13 @@ public class ProgramGenerator {
 
     }
 
-
+    public static List<String> getPrimaryKeys(DatabaseConnection connection,String databaseTableName)  {
+    	List<TableColumn> columnInfo = TableInformationFetcher.fetch(connection, databaseTableName);
+    	return columnInfo.stream()
+    			.filter(TableColumn::isPrimaryKey)
+    			.map(TableColumn::getColumnName)
+    			.collect(Collectors.toList());
+    }
 
 
     private static File createFile(String path) throws FileException  {

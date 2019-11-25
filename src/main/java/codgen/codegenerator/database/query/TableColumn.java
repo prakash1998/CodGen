@@ -9,13 +9,15 @@ public class TableColumn {
     private String columnName;
     private Class<?> columnDataType;
     private boolean isNullable;
+    private boolean isPrimaryKey;
 
-    public TableColumn(int columnId, String columnName, Class<?> columnDataType, boolean isNullable) {
+    public TableColumn(int columnId, String columnName, Class<?> columnDataType, boolean isNullable , boolean isPrimaryKey) {
         this.columnId = columnId;
         this.columnName = columnName;
         this.columnNameCamelCase = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL,columnName);
         this.columnDataType = columnDataType;
         this.isNullable = isNullable;
+        this.isPrimaryKey = isPrimaryKey;
     }
 
     public int getColumnId() {
@@ -38,6 +40,11 @@ public class TableColumn {
         return isNullable;
     }
 
+    public boolean isPrimaryKey() {
+        return isPrimaryKey;
+    }
+
+    
     @Override
     public String toString() {
         return "TableColumn{" +
