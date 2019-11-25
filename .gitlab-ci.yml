@@ -4,13 +4,19 @@ variables:
 # T - thread count (1C -> 1 thread)
     MVN_OPTS: "-B -nsu -T 1C"
 stages:
-    - build
-maven:
-    stage: build
+    - Build
+    - Test
+compile:
+    stage: Build
     script: 
         - mvn $MVN_OPTS clean compile test
     tags:
         - jdk8
-
+test:
+    stage: Test
+    script:
+        - mvn test
+    tags:
+        -jdk8
 
 
