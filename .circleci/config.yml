@@ -16,5 +16,5 @@ jobs:
             paths:
                 - ~/.m2
             key: circleci-codegen-{{ checksum "pom.xml" }}
-        - run: - mvn clean compile #compile the project
-        - run: - mvn test #test project
+        - run: mvn clean compile #compile the project
+        - run: mvn test #test project
