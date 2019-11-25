@@ -11,11 +11,6 @@ maven:
         - mvn $MVN_OPTS clean compile test
     tags:
         - jdk8
-    reports:
-        junit:
-            - target/surefire-reports/TEST-*.xml
-            - target/failsafe-reports/TEST-*.xml
-    coverage: '/\d+.\d+ \% covered/'
 
 
 
