@@ -17,6 +17,4 @@ jobs:
                     - ~/.m2
                 key: circleci-codegen-{{ checksum "pom.xml" }}
             - run: mvn clean compile #compile the project
-    Test:
-        steps:
             - run: mvn test #run unit tests
