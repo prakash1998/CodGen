@@ -9,7 +9,7 @@ stages:
 compile:
     stage: Build
     script: 
-        - mvn $MVN_OPTS clean compile test
+        - mvn $MVN_OPTS clean compile
     tags:
         - jdk8
 test:
