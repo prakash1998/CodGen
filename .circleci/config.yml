@@ -1,20 +1,22 @@
 version: 2
 jobs:
-    build:
+    Build:
         # Remove if parallelism is not desired
         parallelism: 2
         working_directory: ~/codegenci # directory where steps will run
-    docker:
-        - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
-    steps:
-        - checkout
-        - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
-            # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-            key: circleci-codegen-{{ checksum "pom.xml" }}
-        - run: mvn dependency:go-offline # gets the project dependencies
-        - save_cache: # saves the project dependencies
-            paths:
-                - ~/.m2
-            key: circleci-codegen-{{ checksum "pom.xml" }}
-        - run: mvn clean compile #compile the project
-        - run: mvn test #test project
+        docker:
+            - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+        steps:
+            - checkout
+            - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
+                # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+                key: circleci-codegen-{{ checksum "pom.xml" }}
+            - run: mvn dependency:go-offline # gets the project dependencies
+            - save_cache: # saves the project dependencies
+                paths:
+                    - ~/.m2
+                key: circleci-codegen-{{ checksum "pom.xml" }}
+            - run: mvn clean compile #compile the project
+    Test:
+        steps:
+            - run: mvn test #run unit tests
