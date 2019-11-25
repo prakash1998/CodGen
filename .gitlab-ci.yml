@@ -17,6 +17,4 @@ test:
     script:
         - mvn test
     tags:
-        -jdk8
-
-
+        - jdk8
