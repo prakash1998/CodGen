@@ -1,14 +1,21 @@
 variables:
+# B - batch mode
+# nsu - Suppress SNAPSHOT updates
+# T - thread count (1C -> 1 thread)
     MVN_OPTS: "-B -nsu -T 1C"
 stages:
-  - build
+    - build
 maven:
-  stage: build
-  script: 
-    - mvn clean compile
-  tags:
-    - jdk8
-
+    stage: build
+    script: 
+        - mvn $MVN_OPTS clean compile test
+    tags:
+        - jdk8
+    reports:
+        junit:
+            - target/surefire-reports/TEST-*.xml
+            - target/failsafe-reports/TEST-*.xml
+    coverage: '/\d+.\d+ \% covered/'
 
 
 
