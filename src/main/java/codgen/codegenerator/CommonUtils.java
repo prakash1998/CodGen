@@ -67,7 +67,7 @@ public class CommonUtils {
 		return new String[] { dir, packageName };
 	}
 	
-	public static void writeProgramToFile(File path, TypeSpec typeSpec) throws IOException {
+	public static void writeProgramToFile(File path, TypeSpec typeSpec) {
 
 		String[] temp = CommonUtils.getDirAndPackage(path);
 
@@ -77,9 +77,13 @@ public class CommonUtils {
 		JavaFile file = JavaFile.builder(packageName, typeSpec).build();
 
 //        file.writeTo(System.out);
-		
-		
-		file.writeTo(new File(directory));
+
+		try {
+			file.writeTo(new File(directory));
+		} catch (IOException e) {
+			System.out.println("Error while writing program to file");
+			e.printStackTrace();
+		}
 	}
 
 	public static String getClassNameFromTableName(String tableName) {

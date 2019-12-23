@@ -22,7 +22,7 @@ public class DAOClassGenerator {
 //    	
 //    }
 
-    public static void generate(String databaseTableName , File path , List<String> pkeys) throws IOException {
+    public static void generate(String databaseTableName , File path , List<String> pkeys){
 
         String priString = "";
         for( String s: pkeys){
@@ -32,7 +32,7 @@ public class DAOClassGenerator {
 
         String defClassName =  CommonUtils.getClassNameFromTableName(databaseTableName);
 
-        ClassName defclass = ClassName.get(CommonUtils.getDirAndPackage(path)[1] + "immutables",defClassName);
+        ClassName defclass = ClassName.get(CommonUtils.getDirAndPackage(path)[1] + ".immutables",defClassName);
 
         ClassName DAOperation = LibraryClasses.getDBUtilDAOperation();
         ClassName SQLBuilder = LibraryClasses.getDBUtilSQLBuilder();

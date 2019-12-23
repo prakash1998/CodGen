@@ -21,7 +21,7 @@ import codgen.codegenerator.database.query.TableInformationFetcher;
 
 public class DefClassGenerator {
 	
-    public static void generateClassFor(DatabaseConnection connection, String databaseTableName, File path) throws Exception{
+    public static void generateClassFor(DatabaseConnection connection, String databaseTableName, File path){
     	TypeSpec defClass = generateClassFor(connection, databaseTableName);  	
         CommonUtils.writeProgramToFile(path,defClass);
     }
@@ -29,10 +29,10 @@ public class DefClassGenerator {
     public static String getGeneratedClassFor(DatabaseConnection connection, String databaseTableName) throws Exception{
     	TypeSpec defClass = generateClassFor(connection, databaseTableName);
 		JavaFile file = JavaFile.builder("place-package-Name-here",defClass).build();
-		return file.toString();
+		return file.toString().replaceAll("@Mapper\\(\\n *(.*)\\n *\\)", "@Mapper($1)");
     }
     
-    public static TypeSpec generateClassFor(DatabaseConnection connection, String databaseTableName) throws Exception{
+    public static TypeSpec generateClassFor(DatabaseConnection connection, String databaseTableName) {
 
         List<TableColumn> columns =  TableInformationFetcher.fetch(connection,databaseTableName);
 
@@ -56,9 +56,6 @@ public class DefClassGenerator {
 
         for(TableColumn column : columns){
             if(!column.getColumnName().equals("MODIFIER") && !column.getColumnName().equals("MODIFIEDDATE")) {
-
-
-
 
                 MethodSpec.Builder method = MethodSpec.methodBuilder(column.getColumnNameCamelCase())
                         .addModifiers(Modifier.ABSTRACT, Modifier.PUBLIC);
